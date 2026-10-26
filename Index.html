@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>KUIS MENCONGAK — Bilangan Bulat</title>
+<style>
+:root{--navy:#14213d;--blue:#2563eb;--sky:#dbeafe;--yellow:#ffd166;--coral:#ef476f;--green:#16856b;--paper:#f5f8ff}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:linear-gradient(135deg,#e0f2fe,#fdf2f8 55%,#fef3c7);color:var(--navy);min-height:100vh}
+.wrap{max-width:900px;margin:0 auto;padding:22px 16px 42px}.hero{background:linear-gradient(120deg,#14213d,#2563eb);color:#fff;border-radius:24px;padding:26px 24px;box-shadow:0 12px 30px #1e3a8a30;position:relative;overflow:hidden}
+.hero:after{content:"➕  −  ×  ÷";position:absolute;right:18px;bottom:12px;font-size:28px;font-weight:bold;color:#ffffff30;letter-spacing:5px}
+.kicker{font-size:12px;font-weight:bold;letter-spacing:2px;color:var(--yellow)}h1{margin:8px 0;font-size:clamp(28px,5vw,42px)}.hero p{margin:0;max-width:650px;line-height:1.5;color:#eaf2ff}
+.card{background:#fff;border:1px solid #dbe5f5;border-radius:20px;padding:22px;margin-top:18px;box-shadow:0 8px 24px #14213d0d}.notice{background:#fff7dc;border-left:5px solid #f4b400;border-radius:12px;padding:14px 16px;line-height:1.55;font-size:14px}
+label{display:block;font-weight:bold;margin:14px 0 7px}input,select{width:100%;padding:13px 14px;border:2px solid #d6e0f0;border-radius:12px;font-size:16px;background:#fff;color:var(--navy)}input:focus,select:focus{outline:3px solid #bfdbfe;border-color:var(--blue)}
+button{border:0;border-radius:12px;padding:13px 18px;font-size:16px;font-weight:bold;cursor:pointer;background:var(--blue);color:#fff;box-shadow:0 5px 12px #2563eb30}button:disabled{opacity:.45;cursor:not-allowed}.btn-secondary{background:#e8eef9;color:var(--navy);box-shadow:none}
+.row{display:flex;gap:12px;align-items:center;flex-wrap:wrap}.row>*{flex:1}.meta{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-weight:bold;font-size:14px;color:#4b5c7b}.pill{display:inline-block;padding:8px 12px;border-radius:999px;background:#eaf1ff;color:#1d4ed8}.timer{font-variant-numeric:tabular-nums;background:#fff0f2;color:#be123c;padding:9px 13px;border-radius:12px;font-size:19px;font-weight:bold}.progress{height:9px;background:#e8eef9;border-radius:999px;overflow:hidden;margin:16px 0}.bar{height:100%;width:0;background:linear-gradient(90deg,#22c55e,#2563eb);transition:width .2s}
+.qtext{font-size:clamp(24px,4vw,36px);font-weight:bold;text-align:center;padding:24px 8px;line-height:1.4}.options{display:grid;grid-template-columns:1fr 1fr;gap:12px}.option{display:flex;align-items:center;gap:12px;border:2px solid #dbe5f5;background:#f8faff;color:var(--navy);padding:16px;border-radius:14px;text-align:left;box-shadow:none;font-size:18px}.option .letter{width:32px;height:32px;border-radius:10px;background:#dbeafe;display:grid;place-items:center;font-weight:bold;flex-shrink:0}.option.selected{border-color:var(--blue);background:#eff6ff}.small{font-size:13px;color:#64748b;line-height:1.5}.hidden{display:none!important}.result-score{font-size:48px;font-weight:900;color:var(--blue)}.flag{background:#fff1f2;color:#9f1239;border-radius:10px;padding:10px 12px;margin-top:10px;font-size:14px}.good{background:#ecfdf5;color:#065f46;border-radius:10px;padding:10px 12px;margin-top:10px;font-size:14px}
+@media(max-width:560px){.options{grid-template-columns:1fr}.hero{padding:22px 18px}.card{padding:17px}.row>*{flex-basis:100%}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="hero">
+  <div class="kicker">MATEMATIKA • KELAS X SMK</div>
+  <h1>🧠 KUIS MENCONGAK</h1>
+  <p>Bilangan bulat positif, nol, dan bilangan bulat negatif — teliti, cepat, dan jujur!</p>
+</header>
+
+<section class="card" id="startCard">
+  <h2>Identitas Peserta</h2>
+  <div class="row">
+    <div><label for="studentName">Nama lengkap</label><input id="studentName" maxlength="100" autocomplete="name" placeholder="Masukkan nama lengkap"></div>
+    <div><label for="studentClass">Kelas</label><select id="studentClass"><option value="">Pilih kelas</option><option>X TO 2</option><option>X TO 3</option></select></div>
+  </div>
+  <div class="notice" style="margin-top:18px">
+    <b>📌 CATATAN PENTING</b><br>
+    • Waktu total kuis 60 menit, terdiri dari 24 soal.<br>
+    • Waktu setiap soal 2 menit 30 detik. Waktu berjalan otomatis dan soal berpindah saat waktu habis.<br>
+    • Jangan menutup kuis atau membuka aplikasi/tab lain selama pengerjaan.<br>
+    • Jika halaman kuis ditinggalkan atau tab lain dibuka, kejadian akan dicatat pada hasil pengerjaan.<br>
+    • Setiap peserta hanya dapat memulai satu kali pada browser/perangkat ini. Kerjakan mandiri.
+  </div>
+  <p class="small">Catatan teknis: pencatatan perpindahan tab bergantung pada browser. Halaman ini tidak dapat menjamin pemblokiran aplikasi lain atau membatasi percobaan lintas perangkat/browser.</p>
+  <label style="display:flex;gap:10px;align-items:flex-start;font-weight:normal"><input id="agree" type="checkbox" style="width:auto;margin-top:3px"> Saya sudah membaca petunjuk dan siap mengerjakan secara mandiri.</label>
+  <div style="margin-top:18px"><button id="startBtn" onclick="startQuiz()">Mulai Kuis (60 Menit)</button></div>
+  <p id="startError" class="small" style="color:#be123c"></p>
+</section>
+
+<section class="card hidden" id="quizCard">
+  <div class="meta"><span class="pill" id="qCount">Soal 1 dari 24</span><span class="timer" id="timer">02:30</span></div>
+  <div class="progress"><div class="bar" id="progressBar"></div></div>
+  <div class="qtext" id="questionText"></div>
+  <div class="options" id="options"></div>
+  <div class="row" style="margin-top:20px"><span class="small" id="answeredInfo">Belum memilih jawaban</span><button id="nextBtn" onclick="nextQuestion()">Soal Berikutnya →</button></div>
+  <div id="warningLive" class="flag hidden"></div>
+</section>
+
+<section class="card hidden" id="resultCard">
+  <h2>Hasil Pengerjaan</h2>
+  <p id="resultName"></p>
+  <div class="result-score" id="score"></div>
+  <p id="scoreDetail"></p>
+  <div id="integrityNote"></div>
+  <h3>Rekap Jawaban</h3>
+  <p class="small">Rekap ini menunjukkan jawaban yang dipilih. Kunci jawaban dan pembahasan tidak ditampilkan.</p>
+  <div id="answerSummary"></div>
+  <button onclick="window.print()" class="btn-secondary" style="margin-top:18px">Cetak / Simpan Hasil</button>
+</section>
+</div>
+<script>
+const QUESTIONS = [
+ {q:"Hasil dari 7 + (−3) adalah …",a:["4","−4","10","−10"],c:0},
+ {q:"Hasil dari 5 − 9 adalah …",a:["4","−4","14","−14"],c:1},
+ {q:"Hasil dari −6 + 2 adalah …",a:["−8","8","−4","4"],c:2},
+ {q:"Hasil dari 0 − 8 adalah …",a:["8","0","−8","−1"],c:2},
+ {q:"Hasil dari (−4) + (−3) adalah …",a:["−7","−1","7","1"],c:0},
+ {q:"Hasil dari 12 + (−12) adalah …",a:["24","−24","12","0"],c:3},
+ {q:"Hasil dari (−9) − (−5) adalah …",a:["−14","−4","4","14"],c:1},
+ {q:"Hasil dari (−3) × 4 adalah …",a:["12","−12","−7","7"],c:1},
+ {q:"Hasil dari (−24) ÷ 6 adalah …",a:["4","−4","−18","18"],c:1},
+ {q:"Hasil dari (−7) × (−2) adalah …",a:["−14","−9","9","14"],c:3},
+ {q:"Hasil dari 18 ÷ (−3) adalah …",a:["6","−6","15","−15"],c:1},
+ {q:"Hasil dari 6 + 3 × (−2) adalah …",a:["0","−18","12","−12"],c:0},
+ {q:"Hasil dari (−5) + 4 × 3 adalah …",a:["−3","7","−27","27"],c:1},
+ {q:"Hasil dari 20 − 2 × 7 adalah …",a:["126","6","−6","18"],c:1},
+ {q:"Hasil dari (−18) ÷ 3 + 10 adalah …",a:["4","−16","16","−4"],c:0},
+ {q:"Hasil dari 4 × (−3) − (−5) adalah …",a:["−17","−7","7","17"],c:1},
+ {q:"Hasil dari 30 ÷ (−5) × 2 adalah …",a:["−3","−12","12","3"],c:1},
+ {q:"Hasil dari 8 − [3 + (−4)] adalah …",a:["1","5","9","−1"],c:2},
+ {q:"Hasil dari (−2) × [5 − 8] adalah …",a:["−6","6","−26","26"],c:1},
+ {q:"Hasil dari 24 ÷ [2 × (−3)] adalah …",a:["4","−4","−12","12"],c:1},
+ {q:"Hasil dari (−15) + 6 × 4 − 3 adalah …",a:["6","−42","12","−6"],c:0},
+ {q:"Hasil dari 5 − [−2 × (3 + 4)] adalah …",a:["−9","−5","19","9"],c:2},
+ {q:"Hasil dari [18 ÷ (−3)] × [2 − 5] adalah …",a:["−18","18","−2","2"],c:1},
+ {q:"Hasil dari 36 ÷ [−2 × (4 − 7)] + (−5) adalah …",a:["−11","1","−1","11"],c:1}
+];
+const PER_Q = 150;
+let index=0, answers=Array(QUESTIONS.length).fill(null), remaining=PER_Q, interval=null;
+let switches=0, switchLog=[], startedAt=null, finished=false, name="", klass="";
+const $=id=>document.getElementById(id);
+function startQuiz(){
+ name=$("studentName").value.trim(); klass=$("studentClass").value;
+ if(!name || !klass || !$("agree").checked){$("startError").textContent="Lengkapi nama, pilih kelas, dan centang persetujuan terlebih dahulu.";return;}
+ const key="kuisMencongakAttempt_"+name.toLowerCase()+"_"+klass;
+ if(localStorage.getItem(key)){ $("startError").textContent="Percobaan untuk nama dan kelas ini sudah tercatat pada browser ini. Kuis tidak dapat dimulai lagi."; return; }
+ if(!confirm("Pastikan identitas benar. Setelah mulai, kuis hanya dapat dikerjakan satu kali pada browser ini. Mulai sekarang?"))return;
+ localStorage.setItem(key, new Date().toISOString());
+ $("startCard").classList.add("hidden"); $("quizCard").classList.remove("hidden");
+ startedAt=Date.now(); renderQuestion(); interval=setInterval(tick,1000);
+}
+function renderQuestion(){
+ const item=QUESTIONS[index]; remaining=PER_Q;
+ $("qCount").textContent=`Soal ${index+1} dari ${QUESTIONS.length}`;
+ $("progressBar").style.width=`${index/QUESTIONS.length*100}%`;
+ $("questionText").textContent=item.q;
+ $("options").innerHTML="";
+ item.a.forEach((v,i)=>{
+   const b=document.createElement("button"); b.className="option"+(answers[index]===i?" selected":"");
+   b.innerHTML=`<span class="letter">${String.fromCharCode(65+i)}</span><span>${v}</span>`;
+   b.onclick=()=>{answers[index]=i; [...$("options").children].forEach((el,j)=>el.classList.toggle("selected",j===i)); $("answeredInfo").textContent="Jawaban dipilih: "+String.fromCharCode(65+i);};
+   $("options").appendChild(b);
+ });
+ $("answeredInfo").textContent=answers[index]===null?"Belum memilih jawaban":"Jawaban dipilih: "+String.fromCharCode(65+answers[index]);
+ $("nextBtn").textContent=index===QUESTIONS.length-1?"Selesaikan Kuis":"Soal Berikutnya →";
+ updateTimer();
+}
+function updateTimer(){let m=Math.floor(remaining/60),s=remaining%60;$("timer").textContent=`${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}`;$("timer").style.color=remaining<=20?"#be123c":"#be123c";}
+function tick(){if(finished)return;remaining--;updateTimer();if(remaining<=0)nextQuestion(true);}
+function nextQuestion(auto=false){if(finished)return;if(index<QUESTIONS.length-1){index++;renderQuestion();if(auto){$("warningLive").classList.remove("hidden");$("warningLive").textContent="Waktu soal sebelumnya habis. Sistem berpindah otomatis.";}else{$("warningLive").classList.add("hidden");}}else finishQuiz();}
+document.addEventListener("visibilitychange",()=>{
+ if(document.hidden && startedAt && !finished){switches++;const t=new Date().toLocaleTimeString("id-ID");switchLog.push(t);$("warningLive").classList.remove("hidden");$("warningLive").textContent="Peringatan: halaman kuis ditinggalkan/dipindah pada "+t+". Kejadian dicatat pada hasil.";}
+});
+window.addEventListener("blur",()=>{if(startedAt&&!finished){/* visibilitychange is used for reporting; blur alone can occur for normal browser actions */}});
+function finishQuiz(){
+ finished=true;clearInterval(interval);$("quizCard").classList.add("hidden");$("resultCard").classList.remove("hidden");
+ let correct=0;answers.forEach((a,i)=>{if(a===QUESTIONS[i].c)correct++;});
+ $("resultName").textContent=`Nama: ${name} | Kelas: ${klass}`;
+ $("score").textContent=`${Math.round(correct/QUESTIONS.length*100)}`;
+ $("scoreDetail").textContent=`Nilai: ${correct} benar dari ${QUESTIONS.length} soal. Jawaban kosong: ${answers.filter(a=>a===null).length}.`;
+ $("integrityNote").innerHTML=switches?`<div class="flag">Catatan integritas: halaman kuis ditinggalkan/dipindah ${switches} kali. Waktu tercatat: ${switchLog.join(", ")}.</div>`:`<div class="good">Catatan integritas: tidak terdeteksi perpindahan tab melalui browser.</div>`;
+ $("answerSummary").innerHTML=QUESTIONS.map((q,i)=>`<div style="padding:10px 0;border-bottom:1px solid #e5eaf3"><b>${i+1}.</b> ${q.q}<br><span class="small">Jawaban peserta: ${answers[i]===null?"Tidak dijawab":String.fromCharCode(65+answers[i])+". "+q.a[answers[i]]}</span></div>`).join("");
+ $("progressBar").style.width="100%";window.scrollTo({top:0,behavior:"smooth"});
+}
+</script>
+</body>
+</html>
